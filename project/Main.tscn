@@ -6,6 +6,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="icon" type="Sprite" parent="."]
+position = Vector2( 87, 80 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
