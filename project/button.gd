@@ -2,21 +2,15 @@ extends AspectRatioContainer
 export (Texture) var texture_x
 export (Texture) var texture_o
 onready var texture_Button = $"texture button"
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+var state = Logic.State.EMPTY setget set_state
+func set_state (new_state):
+	state = new_state
+	if state == Logic.State.X:
+		texture_Button.texture_normal = texture_x
+	if state == Logic.State.O:
+		texture_Button.texture_normal = texture_o
+	if state == Logic.State.EMPTY:
+		texture_Button.texture_normal = null
 func _on_texture_button_pressed():
-	texture_Button.texture_normal = texture_x
+	emit_signal ("pressed")
+signal pressed
