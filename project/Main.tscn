@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Tic-Tac-Toe-Board.jpg" type="Texture" id=2]
+[ext_resource path="res://TheNautigal-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://.import/Monkeys Spinning Monkeys.mp3-3b23e6ecbeb2fd8b720187adec7535bb.mp3str" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 300
+outline_size = 100
+use_filter = true
+font_data = ExtResource( 3 )
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -31,3 +39,40 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = 512.0
+margin_top = 120.0
+margin_right = 512.0
+margin_bottom = 480.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 0, 0.607843, 1 )
+custom_fonts/font = SubResource( 1 )
+align = 1
+valign = 1
+
+[node name="ResetButton" type="Button" parent="CenterContainer/Label"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -299.0
+margin_top = -116.0
+margin_right = 299.0
+margin_bottom = 387.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[connection signal="pressed" from="CenterContainer/Label/ResetButton" to="." method="_on_ResetButton_pressed"]
