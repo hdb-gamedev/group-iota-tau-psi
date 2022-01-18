@@ -1,10 +1,12 @@
 extends Control
 var grid
 var x_plays = true
+var win_count_x = 0
+var win_count_o = 0
 onready var board = $AspectRatioContainer/TextureRect
 var winner = Logic.State.EMPTY
 const Button = preload ("res://button.tscn")
-func _ready(): 
+func _ready (): 
 	for row in range (0,3) :
 		for column in range (0,3) :
 			var button = Button.instance()
@@ -15,6 +17,9 @@ func _ready():
 			button.anchor_bottom = row * 1.0/3 + 1.0/3
 			button.connect ("pressed" , self, "on_button_pressed" , [button , row , column])
 	grid = [[Logic.State.EMPTY, Logic.State.EMPTY, Logic.State.EMPTY] , [Logic.State.EMPTY, Logic.State.EMPTY, Logic.State.EMPTY] , [Logic.State.EMPTY, Logic.State.EMPTY, Logic.State.EMPTY]]
+	update_win_count ()
+func update_win_count () :
+	$WinCount.text = "Win Count\nX Wins: " + String (win_count_x) + "\nO Wins: " + String (win_count_o)
 func on_button_pressed (button, row, column) :
 	#print (row , " " , column)
 	button.state = turn
@@ -24,9 +29,12 @@ func on_button_pressed (button, row, column) :
 		if turn == Logic.State.X :
 			$CenterContainer/Label.text = "X Wins"
 			winner = Logic.State.X
+			win_count_x = win_count_x + 1
 		if turn == Logic.State.O :
 			$CenterContainer/Label.text = "O Wins"
 			winner = Logic.State.O
+			win_count_o = win_count_o + 1
+		update_win_count ()
 	if tie () :
 		$CenterContainer.visible = true
 		$CenterContainer/Label.text = "Tie"

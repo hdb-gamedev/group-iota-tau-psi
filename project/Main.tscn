@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Tic-Tac-Toe-Board.jpg" type="Texture" id=2]
@@ -8,6 +8,14 @@
 [sub_resource type="DynamicFont" id=1]
 size = 300
 outline_size = 100
+outline_color = Color( 0.945098, 0, 1, 1 )
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 37
+outline_size = 16
+outline_color = Color( 0.945098, 0, 1, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
 
@@ -74,5 +82,17 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
+
+[node name="WinCount" type="Label" parent="."]
+anchor_right = 0.201
+anchor_bottom = 0.467
+margin_left = 35.0
+margin_top = 4.0
+margin_right = 32.176
+margin_bottom = 3.79999
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="CenterContainer/Label/ResetButton" to="." method="_on_ResetButton_pressed"]
